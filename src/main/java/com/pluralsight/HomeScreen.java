@@ -34,7 +34,8 @@ public class HomeScreen {
                 System.out.println("Ledger coming soon...");
             } else if (input.equals("X")) {
                 System.out.println("Goodbye!");
-
+            } else {
+                System.out.println("Invalid option. Try again.");
             }
         }
     }
