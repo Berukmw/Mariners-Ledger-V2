@@ -21,6 +21,10 @@ the CSV when a new transaction is added.
 
 ![Kanban Board](images/KabanBoard.png)
 
+![Diagram of Methods](images/Diagramofmethods.png)
+
+![Loop Diagram](images/Loopdiagram.png)
+
 I themed the app around the Seattle Mariners front office. Player contract payments 
 use real 2026 salary data pulled from FanGraphs, and revenue entries include realistic 
 MLB broadcasting deals, sponsorships, and ticket sales.
