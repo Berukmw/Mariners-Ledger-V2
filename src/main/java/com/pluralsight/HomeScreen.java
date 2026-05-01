@@ -67,7 +67,7 @@ public class HomeScreen {
 
         // use todays date and time for the transaction
         LocalDate date = LocalDate.now();
-        LocalTime time = LocalTime.now();
+        LocalTime time = LocalTime.now().withNano(0);
 
         // create the transaction, add to the in memory list, and save to CSV
         Transaction t = new Transaction(date, time, description, vendor, amount);
@@ -93,7 +93,7 @@ public class HomeScreen {
 
         // use todays date and time for the transaction
         LocalDate date = LocalDate.now();
-        LocalTime time = LocalTime.now();
+        LocalTime time = LocalTime.now().withNano(0);
 
         // create the transaction, add to the in memory list, and save to CSV
         Transaction t = new Transaction(date, time, description, vendor, amount);
