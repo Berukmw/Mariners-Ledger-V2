@@ -5,6 +5,7 @@ import java.util.*;
 
 public class ReportsScreen {
 
+    // blue and reset for the color scheme
     public static final String BLUE = "\u001B[34m";
     public static final String RESET = "\u001B[0m";
 
@@ -18,6 +19,7 @@ public class ReportsScreen {
 
     public void display() {
 
+        // keep the reports screen running until user goes back
         boolean running = true;
 
         while (running) {
@@ -50,6 +52,7 @@ public class ReportsScreen {
         }
     }
 
+    // reusable header so we dont repeat this in every method
     public void printHeader() {
         System.out.println("-".repeat(105));
         System.out.printf(BLUE + "%-12s | %-8s | %-40s | %-20s | %14s" + RESET + "%n",
@@ -58,16 +61,19 @@ public class ReportsScreen {
     }
 
     public void monthToDate() {
+        // grab todays date to compare against transactions
         LocalDate now = LocalDate.now();
         System.out.println("\n" + BLUE + "--- MONTH TO DATE: " + now.getMonth() + " " + now.getYear() + " ---" + RESET);
         System.out.println("(amounts shown as monthly cost)");
         printHeader();
 
+        // loop through every transaction and only show ones from this month
         for (int i = 0; i < transactions.size(); i++) {
             Transaction t = transactions.get(i);
             LocalDate date = t.getDate();
 
             if (date.getMonth() == now.getMonth() && date.getYear() == now.getYear()) {
+                // divide by 12 to show monthly cost instead of full annual amount
                 System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
                         t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount() / 12);
             }
@@ -76,16 +82,19 @@ public class ReportsScreen {
     }
 
     public void previousMonth() {
+        // go back one month from today
         LocalDate lastMonth = LocalDate.now().minusMonths(1);
         System.out.println("\n" + BLUE + "--- PREVIOUS MONTH: " + lastMonth.getMonth() + " " + lastMonth.getYear() + " ---" + RESET);
         System.out.println("(amounts shown as monthly cost)");
         printHeader();
 
+        // loop through and only show transactions from last month
         for (int i = 0; i < transactions.size(); i++) {
             Transaction t = transactions.get(i);
             LocalDate date = t.getDate();
 
             if (date.getMonth() == lastMonth.getMonth() && date.getYear() == lastMonth.getYear()) {
+                // divide by 12 to show monthly cost instead of full annual amount
                 System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
                         t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount() / 12);
             }
@@ -94,10 +103,12 @@ public class ReportsScreen {
     }
 
     public void yearToDate() {
+        // grab the current year to filter against
         int currentYear = LocalDate.now().getYear();
         System.out.println("\n" + BLUE + "--- YEAR TO DATE: " + currentYear + " ---" + RESET);
         printHeader();
 
+        // loop through and show everything from this year
         for (int i = 0; i < transactions.size(); i++) {
             Transaction t = transactions.get(i);
 
@@ -110,10 +121,12 @@ public class ReportsScreen {
     }
 
     public void previousYear() {
+        // subtract 1 from current year to get last year
         int lastYear = LocalDate.now().getYear() - 1;
         System.out.println("\n" + BLUE + "--- PREVIOUS YEAR: " + lastYear + " ---" + RESET);
         printHeader();
 
+        // loop through and only show transactions from last year
         for (int i = 0; i < transactions.size(); i++) {
             Transaction t = transactions.get(i);
 
@@ -127,10 +140,12 @@ public class ReportsScreen {
 
     public void searchByPayee() {
         System.out.print("Enter payee name: ");
+        // lowercase so the search works regardless of how user types it
         String vendor = scanner.nextLine().toLowerCase();
         System.out.println("\n" + BLUE + "--- PAYEE SEARCH: " + vendor + " ---" + RESET);
         printHeader();
 
+        // loop through and check if the payee name contains what the user typed
         for (int i = 0; i < transactions.size(); i++) {
             Transaction t = transactions.get(i);
 

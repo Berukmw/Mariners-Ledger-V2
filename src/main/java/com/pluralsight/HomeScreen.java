@@ -3,9 +3,9 @@ package com.pluralsight;
 import java.time.*;
 import java.util.*;
 
-
 public class HomeScreen {
-    // creating blue color text
+
+    // blue and reset for the color scheme
     public static final String BLUE = "\u001B[34m";
     public static final String RESET = "\u001B[0m";
 
@@ -19,6 +19,7 @@ public class HomeScreen {
 
     public void display() {
 
+        // keep the home screen running until user exits
         boolean running = true;
 
         while (running) {
@@ -29,6 +30,7 @@ public class HomeScreen {
             System.out.println(BLUE + "X)" + RESET + " Exit");
             System.out.print("\nEnter option: ");
 
+            // toUpperCase so it works whether user types d or D
             String input = scanner.nextLine().toUpperCase();
 
             if (input.equals("D")) {
@@ -36,6 +38,7 @@ public class HomeScreen {
             } else if (input.equals("P")) {
                 addExpense();
             } else if (input.equals("L")) {
+                // create ledger screen and pass the same scanner and transactions list
                 LedgerScreen ledgerScreen = new LedgerScreen(scanner, transactions);
                 ledgerScreen.display();
             } else if (input.equals("X")) {
@@ -59,11 +62,14 @@ public class HomeScreen {
         System.out.print("Amount: ");
         double amount = Double.parseDouble(scanner.nextLine());
 
+        // make sure revenue is always positive
         if (amount < 0) amount = Math.abs(amount);
 
+        // use todays date and time for the transaction
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
 
+        // create the transaction, add to the in memory list, and save to CSV
         Transaction t = new Transaction(date, time, description, vendor, amount);
         transactions.add(t);
         FileManager.saveTransaction(t);
@@ -82,11 +88,14 @@ public class HomeScreen {
         System.out.print("Amount: ");
         double amount = Double.parseDouble(scanner.nextLine());
 
+        // make sure expenses are always stored as negative
         if (amount > 0) amount = -amount;
 
+        // use todays date and time for the transaction
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
 
+        // create the transaction, add to the in memory list, and save to CSV
         Transaction t = new Transaction(date, time, description, vendor, amount);
         transactions.add(t);
         FileManager.saveTransaction(t);

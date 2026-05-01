@@ -4,6 +4,7 @@ import java.util.*;
 
 public class LedgerScreen {
 
+    // blue and reset for the color scheme
     public static final String BLUE = "\u001B[34m";
     public static final String RESET = "\u001B[0m";
 
@@ -17,6 +18,7 @@ public class LedgerScreen {
 
     public void display() {
 
+        // keep the ledger screen running until user goes back home
         boolean running = true;
 
         while (running) {
@@ -28,6 +30,7 @@ public class LedgerScreen {
             System.out.println(BLUE + "H)" + RESET + " Home");
             System.out.print("\nEnter option: ");
 
+            // toUpperCase so it works whether user types a or A
             String input = scanner.nextLine().toUpperCase();
 
             if (input.equals("A")) {
@@ -37,6 +40,7 @@ public class LedgerScreen {
             } else if (input.equals("P")) {
                 displayExpenses();
             } else if (input.equals("R")) {
+                // create reports screen and pass the same scanner and transactions list
                 ReportsScreen reportsScreen = new ReportsScreen(scanner, transactions);
                 reportsScreen.display();
             } else if (input.equals("H")) {
@@ -47,6 +51,7 @@ public class LedgerScreen {
         }
     }
 
+    // reusable header so we dont repeat this in every method
     public void printHeader() {
         System.out.println("-".repeat(105));
         System.out.printf(BLUE + "%-12s | %-8s | %-40s | %-20s | %14s" + RESET + "%n",
@@ -58,6 +63,7 @@ public class LedgerScreen {
         System.out.println("\n" + BLUE + "--- ALL ENTRIES ---" + RESET);
         printHeader();
 
+        // loop through every transaction and print it
         for (int i = 0; i < transactions.size(); i++) {
             Transaction t = transactions.get(i);
             System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
@@ -70,6 +76,7 @@ public class LedgerScreen {
         System.out.println("\n" + BLUE + "--- REVENUE ---" + RESET);
         printHeader();
 
+        // loop through and only print transactions with a positive amount
         for (int i = 0; i < transactions.size(); i++) {
             Transaction t = transactions.get(i);
             if (t.getAmount() > 0) {
@@ -84,6 +91,7 @@ public class LedgerScreen {
         System.out.println("\n" + BLUE + "--- EXPENSES ---" + RESET);
         printHeader();
 
+        // loop through and only print transactions with a negative amount
         for (int i = 0; i < transactions.size(); i++) {
             Transaction t = transactions.get(i);
             if (t.getAmount() < 0) {
