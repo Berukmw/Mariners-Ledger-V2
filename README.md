@@ -75,3 +75,5 @@ these decisions easier to catch early.
 ![Financial Ledger](images/Financialscreen.png)
 
 ![Reports Screen](images/Reportsscreen.png)
+
+Thank you! & Go M's!!
