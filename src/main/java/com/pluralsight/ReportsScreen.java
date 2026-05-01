@@ -60,7 +60,7 @@ public class ReportsScreen {
 
             if (date.getMonth() == now.getMonth() && date.getYear() == now.getYear()) {
                 System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
-                        t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());            }
+                        t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount() / 12);            }
         }
     }
 
@@ -74,7 +74,7 @@ public class ReportsScreen {
 
             if (date.getMonth() == lastMonth.getMonth() && date.getYear() == lastMonth.getYear()) {
                 System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
-                        t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());            }
+                        t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount() / 12);            }
         }
     }
 
