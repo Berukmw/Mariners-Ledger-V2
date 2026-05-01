@@ -34,7 +34,8 @@ public class LedgerScreen {
             } else if (input.equals("P")) {
                 displayPayments();
             } else if (input.equals("R")) {
-                System.out.println("Reports coming soon...");
+                ReportsScreen reportsScreen = new ReportsScreen(scanner, transactions);
+                reportsScreen.display();
             } else if (input.equals("H")) {
                 running = false;
             } else {
