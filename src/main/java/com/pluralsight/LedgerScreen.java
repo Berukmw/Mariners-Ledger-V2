@@ -52,8 +52,8 @@ public class LedgerScreen {
         System.out.println("\n" + BLUE + "--- ALL ENTRIES ---" + RESET);
         for (int i = 0; i < transactions.size(); i++) {
             Transaction t = transactions.get(i);
-            System.out.println(t.getDate() + " | " + t.getTime() + " | " + t.getDescription() + " | " + t.getVendor() + " | " + t.getAmount());
-        }
+            System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
+                    t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());        }
     }
 
     public void displayRevenue() {
@@ -61,8 +61,8 @@ public class LedgerScreen {
         for (int i = 0; i < transactions.size(); i++) {
             Transaction t = transactions.get(i);
             if (t.getAmount() > 0) {
-                System.out.println(t.getDate() + " | " + t.getTime() + " | " + t.getDescription() + " | " + t.getVendor() + " | " + t.getAmount());
-            }
+                System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
+                        t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());            }
         }
     }
 
@@ -71,8 +71,8 @@ public class LedgerScreen {
         for (int i = 0; i < transactions.size(); i++) {
             Transaction t = transactions.get(i);
             if (t.getAmount() < 0) {
-                System.out.println(t.getDate() + " | " + t.getTime() + " | " + t.getDescription() + " | " + t.getVendor() + " | " + t.getAmount());
-            }
+                System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
+                        t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());            }
         }
     }
 }

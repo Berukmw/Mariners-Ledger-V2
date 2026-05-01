@@ -59,8 +59,8 @@ public class ReportsScreen {
             LocalDate date = t.getDate();
 
             if (date.getMonth() == now.getMonth() && date.getYear() == now.getYear()) {
-                System.out.println(t.getDate() + " | " + t.getTime() + " | " + t.getDescription() + " | " + t.getVendor() + " | " + t.getAmount());
-            }
+                System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
+                        t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());            }
         }
     }
 
@@ -73,8 +73,8 @@ public class ReportsScreen {
             LocalDate date = t.getDate();
 
             if (date.getMonth() == lastMonth.getMonth() && date.getYear() == lastMonth.getYear()) {
-                System.out.println(t.getDate() + " | " + t.getTime() + " | " + t.getDescription() + " | " + t.getVendor() + " | " + t.getAmount());
-            }
+                System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
+                        t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());            }
         }
     }
 
@@ -86,8 +86,8 @@ public class ReportsScreen {
             Transaction t = transactions.get(i);
 
             if (t.getDate().getYear() == currentYear) {
-                System.out.println(t.getDate() + " | " + t.getTime() + " | " + t.getDescription() + " | " + t.getVendor() + " | " + t.getAmount());
-            }
+                System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
+                        t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());            }
         }
     }
 
@@ -99,8 +99,8 @@ public class ReportsScreen {
             Transaction t = transactions.get(i);
 
             if (t.getDate().getYear() == lastYear) {
-                System.out.println(t.getDate() + " | " + t.getTime() + " | " + t.getDescription() + " | " + t.getVendor() + " | " + t.getAmount());
-            }
+                System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
+                        t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());            }
         }
     }
 
@@ -113,8 +113,8 @@ public class ReportsScreen {
             Transaction t = transactions.get(i);
 
             if (t.getVendor().toLowerCase().contains(vendor)) {
-                System.out.println(t.getDate() + " | " + t.getTime() + " | " + t.getDescription() + " | " + t.getVendor() + " | " + t.getAmount());
-            }
+                System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
+                        t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());            }
         }
     }
 }
