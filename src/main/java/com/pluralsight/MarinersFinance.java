@@ -10,6 +10,9 @@ public class MarinersFinance {
 
     public static void main(String[] args) {
 
+        ConsoleWindow window = new ConsoleWindow();
+        window.open();
+
         // welcome banner
         System.out.println(BLUE + "╔══════════════════════════════════════════╗");
         System.out.println("║                                          ║");
