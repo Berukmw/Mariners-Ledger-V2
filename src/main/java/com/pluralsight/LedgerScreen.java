@@ -55,30 +55,34 @@ public class LedgerScreen {
 
     // reusable header so we dont repeat this in every method
     public void printHeader() {
-        System.out.println("-".repeat(105));
-        System.out.printf(BLUE + "%-12s | %-8s | %-40s | %-20s | %14s" + RESET + "%n",
+        System.out.println("-".repeat(108));
+        System.out.printf(BLUE + "%-12s | %-8s | %-40s | %-24s | %-12s" + RESET + "%n",
                 "DATE", "TIME", "DESCRIPTION", "PAYEE", "AMOUNT");
-        System.out.println("-".repeat(105));
+        System.out.println("-".repeat(108));
     }
 
-    // reusable total line - green if net positive, red if net negative
+    // prints one row, green for revenue, red for expenses
+    public void printRow(Transaction t) {
+        String color = t.getAmount() >= 0 ? GREEN : RED;
+        System.out.printf(color + "%-12s | %-8s | %-40s | %-24s | %,12.2f" + RESET + "%n",
+                t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());
+    }
+
+    // total line - green if net positive, red if net negative
     public void printTotal(double total) {
         String color = total >= 0 ? GREEN : RED;
-        System.out.printf(BLUE + "%-85s" + RESET + " | " + color + "%,14.2f" + RESET + "%n", "TOTAL", total);
-        System.out.println("-".repeat(105));
+        System.out.printf(BLUE + "%-89s" + RESET + " | " + color + "%,12.2f" + RESET + "%n", "TOTAL", total);
+        System.out.println("-".repeat(108));
     }
 
     public void displayAll() {
         System.out.println("\n" + BLUE + "--- ALL ENTRIES ---" + RESET);
         printHeader();
 
-        // loop through every transaction and print it, green for revenue, red for expenses
         double total = 0;
         for (int i = 0; i < transactions.size(); i++) {
             Transaction t = transactions.get(i);
-            String color = t.getAmount() >= 0 ? GREEN : RED;
-            System.out.printf("%-12s | %-8s | %-40s | %-20s | " + color + "%,14.2f" + RESET + "%n",
-                    t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());
+            printRow(t);
             total += t.getAmount();
         }
         printTotal(total);
@@ -88,13 +92,11 @@ public class LedgerScreen {
         System.out.println("\n" + BLUE + "--- REVENUE ---" + RESET);
         printHeader();
 
-        // loop through and only print transactions with a positive amount
         double total = 0;
         for (int i = 0; i < transactions.size(); i++) {
             Transaction t = transactions.get(i);
             if (t.getAmount() > 0) {
-                System.out.printf("%-12s | %-8s | %-40s | %-20s | " + GREEN + "%,14.2f" + RESET + "%n",
-                        t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());
+                printRow(t);
                 total += t.getAmount();
             }
         }
@@ -105,13 +107,11 @@ public class LedgerScreen {
         System.out.println("\n" + BLUE + "--- EXPENSES ---" + RESET);
         printHeader();
 
-        // loop through and only print transactions with a negative amount
         double total = 0;
         for (int i = 0; i < transactions.size(); i++) {
             Transaction t = transactions.get(i);
             if (t.getAmount() < 0) {
-                System.out.printf("%-12s | %-8s | %-40s | %-20s | " + RED + "%,14.2f" + RESET + "%n",
-                        t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());
+                printRow(t);
                 total += t.getAmount();
             }
         }
