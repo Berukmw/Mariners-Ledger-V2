@@ -50,17 +50,40 @@ public class HomeScreen {
         }
     }
 
+    // keeps asking for a value until the user enters something other than blank
+    private String readRequiredText(String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            String input = scanner.nextLine().trim();
+            if (!input.isEmpty()) {
+                return input;
+            }
+            System.out.println("This field can't be blank. Please enter a value.");
+        }
+    }
+
+    // keeps asking for Amount until the user enters a valid number
+    // instead of crashing the whole app on bad input
+    private double readAmount() {
+        while (true) {
+            System.out.print("Amount: ");
+            String input = scanner.nextLine();
+            try {
+                return Double.parseDouble(input);
+            } catch (NumberFormatException e) {
+                System.out.println("That's not a valid number. Please enter an amount like 250 or 99.99.");
+            }
+        }
+    }
+
     public void addRevenue() {
         System.out.println("\n" + BLUE + "----- ADD REVENUE -----" + RESET);
 
-        System.out.print("Description: ");
-        String description = scanner.nextLine();
+        String description = readRequiredText("Description: ");
 
-        System.out.print("Payee: ");
-        String vendor = scanner.nextLine();
+        String vendor = readRequiredText("Payee: ");
 
-        System.out.print("Amount: ");
-        double amount = Double.parseDouble(scanner.nextLine());
+        double amount = readAmount();
 
         // make sure revenue is always positive
         if (amount < 0) amount = Math.abs(amount);
@@ -79,14 +102,11 @@ public class HomeScreen {
     public void addExpense() {
         System.out.println("\n" + BLUE + "----- ADD EXPENSE -----" + RESET);
 
-        System.out.print("Description: ");
-        String description = scanner.nextLine();
+        String description = readRequiredText("Description: ");
 
-        System.out.print("Payee: ");
-        String vendor = scanner.nextLine();
+        String vendor = readRequiredText("Payee: ");
 
-        System.out.print("Amount: ");
-        double amount = Double.parseDouble(scanner.nextLine());
+        double amount = readAmount();
 
         // make sure expenses are always stored as negative
         if (amount > 0) amount = -amount;
