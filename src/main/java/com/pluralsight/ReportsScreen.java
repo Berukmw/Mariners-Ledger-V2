@@ -54,16 +54,16 @@ public class ReportsScreen {
     }
 
     public void printHeader() {
-        System.out.println("-".repeat(110));
-        System.out.printf(BLUE + "%-12s | %-8s | %-40s | %-24s | %14s" + RESET + "%n",
+        System.out.println("-".repeat(111));
+        System.out.printf(BLUE + "%-12s | %-8s | %-40s | %-24s | %15s" + RESET + "%n",
                 "DATE", "TIME", "DESCRIPTION", "PAYEE", "AMOUNT");
-        System.out.println("-".repeat(110));
+        System.out.println("-".repeat(111));
     }
 
     public void printTotal(double total) {
         String color = total >= 0 ? GREEN : RED;
-        System.out.printf(BLUE + "%-93s" + RESET + " | " + color + "%,14.2f" + RESET + "%n", "TOTAL", total);
-        System.out.println("-".repeat(110));
+        System.out.printf(BLUE + "%-93s" + RESET + " | " + color + "%,15.2f" + RESET + "%n", "TOTAL", total);
+        System.out.println("-".repeat(111));
     }
 
     public void monthToDate() {
@@ -80,7 +80,7 @@ public class ReportsScreen {
             if (date.getMonth() == now.getMonth() && date.getYear() == now.getYear()) {
                 double monthlyAmount = t.getAmount() / 12;
                 String color = monthlyAmount >= 0 ? GREEN : RED;
-                System.out.printf(color + "%-12s | %-8s | %-40s | %-24s | %,14.2f" + RESET + "%n",
+                System.out.printf(color + "%-12s | %-8s | %-40s | %-24s | %,15.2f" + RESET + "%n",
                         t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), monthlyAmount);
                 total += monthlyAmount;
             }
@@ -98,7 +98,7 @@ public class ReportsScreen {
             Transaction t = transactions.get(i);
             double monthlyAmount = t.getAmount() / 12;
             String color = monthlyAmount >= 0 ? GREEN : RED;
-            System.out.printf(color + "%-12s | %-8s | %-40s | %-24s | %,14.2f" + RESET + "%n",
+            System.out.printf(color + "%-12s | %-8s | %-40s | %-24s | %,15.2f" + RESET + "%n",
                     t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), monthlyAmount);
             total += monthlyAmount;
         }
@@ -116,7 +116,7 @@ public class ReportsScreen {
 
             if (t.getDate().getYear() == currentYear) {
                 String color = t.getAmount() >= 0 ? GREEN : RED;
-                System.out.printf(color + "%-12s | %-8s | %-40s | %-24s | %,14.2f" + RESET + "%n",
+                System.out.printf(color + "%-12s | %-8s | %-40s | %-24s | %,15.2f" + RESET + "%n",
                         t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());
                 total += t.getAmount();
             }
@@ -135,7 +135,7 @@ public class ReportsScreen {
 
             if (t.getDate().getYear() == lastYear) {
                 String color = t.getAmount() >= 0 ? GREEN : RED;
-                System.out.printf(color + "%-12s | %-8s | %-40s | %-24s | %,14.2f" + RESET + "%n",
+                System.out.printf(color + "%-12s | %-8s | %-40s | %-24s | %,15.2f" + RESET + "%n",
                         t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());
                 total += t.getAmount();
             }
@@ -155,7 +155,7 @@ public class ReportsScreen {
 
             if (t.getVendor().toLowerCase().contains(vendor)) {
                 String color = t.getAmount() >= 0 ? GREEN : RED;
-                System.out.printf(color + "%-12s | %-8s | %-40s | %-24s | %,14.2f" + RESET + "%n",
+                System.out.printf(color + "%-12s | %-8s | %-40s | %-24s | %,15.2f" + RESET + "%n",
                         t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());
                 total += t.getAmount();
             }

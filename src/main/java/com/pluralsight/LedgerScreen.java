@@ -55,24 +55,24 @@ public class LedgerScreen {
 
     // reusable header so we dont repeat this in every method
     public void printHeader() {
-        System.out.println("-".repeat(108));
-        System.out.printf(BLUE + "%-12s | %-8s | %-40s | %-24s | %-12s" + RESET + "%n",
+        System.out.println("-".repeat(111));
+        System.out.printf(BLUE + "%-12s | %-8s | %-40s | %-24s | %15s" + RESET + "%n",
                 "DATE", "TIME", "DESCRIPTION", "PAYEE", "AMOUNT");
-        System.out.println("-".repeat(108));
+        System.out.println("-".repeat(111));
     }
 
     // prints one row, green for revenue, red for expenses
     public void printRow(Transaction t) {
         String color = t.getAmount() >= 0 ? GREEN : RED;
-        System.out.printf(color + "%-12s | %-8s | %-40s | %-24s | %,12.2f" + RESET + "%n",
+        System.out.printf(color + "%-12s | %-8s | %-40s | %-24s | %,15.2f" + RESET + "%n",
                 t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());
     }
 
     // total line - green if net positive, red if net negative
     public void printTotal(double total) {
         String color = total >= 0 ? GREEN : RED;
-        System.out.printf(BLUE + "%-89s" + RESET + " | " + color + "%,12.2f" + RESET + "%n", "TOTAL", total);
-        System.out.println("-".repeat(108));
+        System.out.printf(BLUE + "%-93s" + RESET + " | " + color + "%,15.2f" + RESET + "%n", "TOTAL", total);
+        System.out.println("-".repeat(111));
     }
 
     public void displayAll() {
