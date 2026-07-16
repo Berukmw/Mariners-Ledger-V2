@@ -15,11 +15,16 @@ public class MarinersFinance {
         window.open();
 
         // welcome banner
-        System.out.println(BLUE + "╔══════════════════════════════════════════╗");
-        System.out.println("║                                          ║");
-        System.out.println("║      SEATTLE MARINERS 2026 FINANCES      ║");
-        System.out.println("║                                          ║");
-        System.out.println("╚══════════════════════════════════════════╝" + RESET);
+        System.out.println(BLUE + "─────────────────────────────────────\n" +
+                "                  N                  \n" +
+                "                  |                  \n" +
+                "          W ------+------ E          \n" +
+                "                  |                  \n" +
+                "                  S                  \n" +
+                "\n" +
+                "   S E A T T L E   M A R I N E R S   \n" +
+                "             L E D G E R             \n" +
+                "─────────────────────────────────────" + RESET);
         System.out.println("\nLoading... " + BLUE + "Go M's!" + RESET + "\n");
 
         // load all transactions from the CSV once so we dont have to keep reading the file

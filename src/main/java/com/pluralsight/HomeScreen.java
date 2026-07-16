@@ -23,11 +23,15 @@ public class HomeScreen {
         boolean running = true;
 
         while (running) {
-            System.out.println("\n" + BLUE + "----- HOME SCREEN -----" + RESET);
-            System.out.println(BLUE + "D)" + RESET + " Add Revenue");
-            System.out.println(BLUE + "P)" + RESET + " Add Expense");
-            System.out.println(BLUE + "L)" + RESET + " Financial Ledger");
-            System.out.println(BLUE + "X)" + RESET + " Exit");
+            System.out.println();
+            System.out.println(BLUE + "┌───────────────────────────────────┐" + RESET);
+            System.out.println(BLUE + "│" + RESET + "            HOME SCREEN            " + BLUE + "│" + RESET);
+            System.out.println(BLUE + "├───────────────────────────────────┤" + RESET);
+            System.out.println(BLUE + "│  D)" + RESET + "  Add Revenue                  " + BLUE + "│" + RESET);
+            System.out.println(BLUE + "│  P)" + RESET + "  Add Expense                  " + BLUE + "│" + RESET);
+            System.out.println(BLUE + "│  L)" + RESET + "  Financial Ledger             " + BLUE + "│" + RESET);
+            System.out.println(BLUE + "│  X)" + RESET + "  Exit                         " + BLUE + "│" + RESET);
+            System.out.println(BLUE + "└───────────────────────────────────┘" + RESET);
             System.out.print("\nEnter option: ");
 
             // toUpperCase so it works whether user types d or D
