@@ -39,19 +39,14 @@ public class ConsoleWindow {
     private void buildWindow() {
         JFrame frame = new JFrame("Seattle Mariners 2026 Finances");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
+        frame.setSize(900, 720);
         frame.setLocationRelativeTo(null); // center it on the screen
 
         // monospaced or the ledger tables wont line up
         Font mono = new Font(Font.MONOSPACED, Font.PLAIN, 12);
 
 
-        outputPane = new JTextPane() {
-            @Override
-            public Dimension getMaximumSize() {
-                return getPreferredSize();
-            }
-        };
+        outputPane = new JTextPane();
         outputPane.setEditable(false);
         outputPane.setFont(mono);
         outputPane.setBackground(Color.BLACK);
@@ -66,7 +61,6 @@ public class ConsoleWindow {
 
 
         outputPane.setFocusable(false);
-        outputPane.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         inputField = new JTextField();
         inputField.setFont(mono);
@@ -76,24 +70,15 @@ public class ConsoleWindow {
         inputField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(0x33, 0x33, 0x33)),
                 BorderFactory.createEmptyBorder(4, 6, 4, 6)));
-        inputField.setAlignmentX(Component.LEFT_ALIGNMENT);
-
         inputField.addActionListener(e -> submit(inputField.getText()));
 
-        inputField.setMaximumSize(new Dimension(Integer.MAX_VALUE, inputField.getPreferredSize().height));
-
-        JPanel content = new JPanel();
-        content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
-        content.setBackground(Color.BLACK);
-        content.add(outputPane);
-        content.add(inputField);
-        content.add(Box.createVerticalGlue());
-
-        JScrollPane scroll = new JScrollPane(content);
+        // only the output scrolls; the input field is pinned to the bottom so it never leaves the screen
+        JScrollPane scroll = new JScrollPane(outputPane);
         scroll.setBorder(BorderFactory.createEmptyBorder());
         scroll.getViewport().setBackground(Color.BLACK);
 
         frame.add(scroll, BorderLayout.CENTER);
+        frame.add(inputField, BorderLayout.SOUTH);
         frame.setVisible(true);
         inputField.requestFocusInWindow();
     }
@@ -137,7 +122,7 @@ public class ConsoleWindow {
             insert("Input error: " + e.getMessage() + "\n", defaultStyle);
         }
 
-        scrollToInput();
+        scrollToBottom();
     }
 
     private void append(String text) {
@@ -153,7 +138,7 @@ public class ConsoleWindow {
             }
 
             insert(text.substring(last), currentStyle);
-            scrollToInput();
+            scrollToBottom();
         });
     }
 
@@ -168,9 +153,8 @@ public class ConsoleWindow {
     }
 
 
-    private void scrollToInput() {
-
-        SwingUtilities.invokeLater(() -> inputField.scrollRectToVisible(
-                new Rectangle(0, 0, inputField.getWidth(), inputField.getHeight())));
+    // keep the newest output line in view; the input field itself is always visible at the bottom
+    private void scrollToBottom() {
+        SwingUtilities.invokeLater(() -> outputPane.setCaretPosition(doc.getLength()));
     }
 }
