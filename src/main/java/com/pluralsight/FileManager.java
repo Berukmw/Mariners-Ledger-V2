@@ -6,12 +6,16 @@ import java.util.*;
 
 public class FileManager {
 
+    // matches the actual file name on disk (capital T) so this works on
+    // case-sensitive file systems like Mac/Linux, not just Windows/IntelliJ
+    private static final String FILE_NAME = "Transactions.csv";
+
     public static ArrayList<Transaction> loadTransactions() {
         // this is where we store all the transactions once we read them in
         ArrayList<Transaction> transactions = new ArrayList<>();
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("transactions.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME));
             String line = reader.readLine(); // skip the header row
 
             // keep reading lines until we hit the end of the file
@@ -43,7 +47,7 @@ public class FileManager {
     public static void saveTransaction(Transaction t) {
         try {
             // true means append mode so we don't overwrite existing transactions
-            BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true));
             writer.write(t.getDate() + "|" + t.getTime() + "|" + t.getDescription() + "|" + t.getVendor() + "|" + t.getAmount());
             writer.newLine();
             writer.close();
