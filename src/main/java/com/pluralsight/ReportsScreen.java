@@ -5,8 +5,10 @@ import java.util.*;
 
 public class ReportsScreen {
 
-    // blue and reset for the color scheme
+    // color scheme - blue for headers/menus, green for revenue, red for expenses
     public static final String BLUE = "\u001B[34m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String RED = "\u001B[31m";
     public static final String RESET = "\u001B[0m";
 
     private Scanner scanner;
@@ -60,6 +62,13 @@ public class ReportsScreen {
         System.out.println("-".repeat(105));
     }
 
+    // reusable total line - green if net positive, red if net negative
+    public void printTotal(double total) {
+        String color = total >= 0 ? GREEN : RED;
+        System.out.printf(BLUE + "%-85s" + RESET + " | " + color + "%,14.2f" + RESET + "%n", "TOTAL", total);
+        System.out.println("-".repeat(105));
+    }
+
     public void monthToDate() {
         // grab todays date to compare against transactions
         LocalDate now = LocalDate.now();
@@ -68,17 +77,21 @@ public class ReportsScreen {
         printHeader();
 
         // loop through every transaction and only show ones from this month
+        double total = 0;
         for (int i = 0; i < transactions.size(); i++) {
             Transaction t = transactions.get(i);
             LocalDate date = t.getDate();
 
             if (date.getMonth() == now.getMonth() && date.getYear() == now.getYear()) {
                 // divide by 12 to show monthly cost instead of full annual amount
-                System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
-                        t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount() / 12);
+                double monthlyAmount = t.getAmount() / 12;
+                String color = monthlyAmount >= 0 ? GREEN : RED;
+                System.out.printf("%-12s | %-8s | %-40s | %-20s | " + color + "%,14.2f" + RESET + "%n",
+                        t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), monthlyAmount);
+                total += monthlyAmount;
             }
         }
-        System.out.println("-".repeat(105));
+        printTotal(total);
     }
 
     public void previousMonth() {
@@ -89,17 +102,21 @@ public class ReportsScreen {
         printHeader();
 
         // loop through and only show transactions from last month
+        double total = 0;
         for (int i = 0; i < transactions.size(); i++) {
             Transaction t = transactions.get(i);
             LocalDate date = t.getDate();
 
             if (date.getMonth() == lastMonth.getMonth() && date.getYear() == lastMonth.getYear()) {
                 // divide by 12 to show monthly cost instead of full annual amount
-                System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
-                        t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount() / 12);
+                double monthlyAmount = t.getAmount() / 12;
+                String color = monthlyAmount >= 0 ? GREEN : RED;
+                System.out.printf("%-12s | %-8s | %-40s | %-20s | " + color + "%,14.2f" + RESET + "%n",
+                        t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), monthlyAmount);
+                total += monthlyAmount;
             }
         }
-        System.out.println("-".repeat(105));
+        printTotal(total);
     }
 
     public void yearToDate() {
@@ -109,15 +126,18 @@ public class ReportsScreen {
         printHeader();
 
         // loop through and show everything from this year
+        double total = 0;
         for (int i = 0; i < transactions.size(); i++) {
             Transaction t = transactions.get(i);
 
             if (t.getDate().getYear() == currentYear) {
-                System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
+                String color = t.getAmount() >= 0 ? GREEN : RED;
+                System.out.printf("%-12s | %-8s | %-40s | %-20s | " + color + "%,14.2f" + RESET + "%n",
                         t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());
+                total += t.getAmount();
             }
         }
-        System.out.println("-".repeat(105));
+        printTotal(total);
     }
 
     public void previousYear() {
@@ -127,15 +147,18 @@ public class ReportsScreen {
         printHeader();
 
         // loop through and only show transactions from last year
+        double total = 0;
         for (int i = 0; i < transactions.size(); i++) {
             Transaction t = transactions.get(i);
 
             if (t.getDate().getYear() == lastYear) {
-                System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
+                String color = t.getAmount() >= 0 ? GREEN : RED;
+                System.out.printf("%-12s | %-8s | %-40s | %-20s | " + color + "%,14.2f" + RESET + "%n",
                         t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());
+                total += t.getAmount();
             }
         }
-        System.out.println("-".repeat(105));
+        printTotal(total);
     }
 
     public void searchByPayee() {
@@ -146,14 +169,17 @@ public class ReportsScreen {
         printHeader();
 
         // loop through and check if the payee name contains what the user typed
+        double total = 0;
         for (int i = 0; i < transactions.size(); i++) {
             Transaction t = transactions.get(i);
 
             if (t.getVendor().toLowerCase().contains(vendor)) {
-                System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
+                String color = t.getAmount() >= 0 ? GREEN : RED;
+                System.out.printf("%-12s | %-8s | %-40s | %-20s | " + color + "%,14.2f" + RESET + "%n",
                         t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());
+                total += t.getAmount();
             }
         }
-        System.out.println("-".repeat(105));
+        printTotal(total);
     }
 }

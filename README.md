@@ -1,4 +1,4 @@
-# Seattle Mariners 2026 Finances
+admin# Seattle Mariners 2026 Finances
 #### A CLI accounting ledger app built around the Seattle Mariners front office finances.
 
 ## How to Run
