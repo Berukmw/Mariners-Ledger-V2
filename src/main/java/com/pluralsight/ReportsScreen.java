@@ -54,10 +54,10 @@ public class ReportsScreen {
 
     // reusable header so we dont repeat this in every method
     public void printHeader() {
-        System.out.println("-".repeat(105));
-        System.out.printf(BLUE + "%-12s | %-8s | %-40s | %-20s | %14s" + RESET + "%n",
+        System.out.println("-".repeat(110));
+        System.out.printf(BLUE + "%-12s | %-8s | %-40s | %-24s | %14s" + RESET + "%n",
                 "DATE", "TIME", "DESCRIPTION", "PAYEE", "AMOUNT");
-        System.out.println("-".repeat(105));
+        System.out.println("-".repeat(110));
     }
 
     public void monthToDate() {
@@ -74,11 +74,11 @@ public class ReportsScreen {
 
             if (date.getMonth() == now.getMonth() && date.getYear() == now.getYear()) {
                 // divide by 12 to show monthly cost instead of full annual amount
-                System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
+                System.out.printf("%-12s | %-8s | %-40s | %-24s | %,14.2f%n",
                         t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount() / 12);
             }
         }
-        System.out.println("-".repeat(105));
+        System.out.println("-".repeat(110));
     }
 
     public void previousMonth() {
@@ -95,11 +95,11 @@ public class ReportsScreen {
 
             if (date.getMonth() == lastMonth.getMonth() && date.getYear() == lastMonth.getYear()) {
                 // divide by 12 to show monthly cost instead of full annual amount
-                System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
+                System.out.printf("%-12s | %-8s | %-40s | %-24s | %,14.2f%n",
                         t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount() / 12);
             }
         }
-        System.out.println("-".repeat(105));
+        System.out.println("-".repeat(110));
     }
 
     public void yearToDate() {
@@ -113,11 +113,11 @@ public class ReportsScreen {
             Transaction t = transactions.get(i);
 
             if (t.getDate().getYear() == currentYear) {
-                System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
+                System.out.printf("%-12s | %-8s | %-40s | %-24s | %,14.2f%n",
                         t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());
             }
         }
-        System.out.println("-".repeat(105));
+        System.out.println("-".repeat(110));
     }
 
     public void previousYear() {
@@ -131,11 +131,11 @@ public class ReportsScreen {
             Transaction t = transactions.get(i);
 
             if (t.getDate().getYear() == lastYear) {
-                System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
+                System.out.printf("%-12s | %-8s | %-40s | %-24s | %,14.2f%n",
                         t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());
             }
         }
-        System.out.println("-".repeat(105));
+        System.out.println("-".repeat(110));
     }
 
     public void searchByPayee() {
@@ -150,10 +150,10 @@ public class ReportsScreen {
             Transaction t = transactions.get(i);
 
             if (t.getVendor().toLowerCase().contains(vendor)) {
-                System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
+                System.out.printf("%-12s | %-8s | %-40s | %-24s | %,14.2f%n",
                         t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());
             }
         }
-        System.out.println("-".repeat(105));
+        System.out.println("-".repeat(110));
     }
 }

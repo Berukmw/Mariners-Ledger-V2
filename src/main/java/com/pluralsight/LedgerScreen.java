@@ -53,10 +53,10 @@ public class LedgerScreen {
 
     // reusable header so we dont repeat this in every method
     public void printHeader() {
-        System.out.println("-".repeat(105));
-        System.out.printf(BLUE + "%-12s | %-8s | %-40s | %-20s | %14s" + RESET + "%n",
+        System.out.println("-".repeat(110));
+        System.out.printf(BLUE + "%-12s | %-8s | %-40s | %-24s | %14s" + RESET + "%n",
                 "DATE", "TIME", "DESCRIPTION", "PAYEE", "AMOUNT");
-        System.out.println("-".repeat(105));
+        System.out.println("-".repeat(110));
     }
 
     public void displayAll() {
@@ -66,10 +66,10 @@ public class LedgerScreen {
         // loop through every transaction and print it
         for (int i = 0; i < transactions.size(); i++) {
             Transaction t = transactions.get(i);
-            System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
+            System.out.printf("%-12s | %-8s | %-40s | %-24s | %,14.2f%n",
                     t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());
         }
-        System.out.println("-".repeat(105));
+        System.out.println("-".repeat(110));
     }
 
     public void displayRevenue() {
@@ -80,11 +80,11 @@ public class LedgerScreen {
         for (int i = 0; i < transactions.size(); i++) {
             Transaction t = transactions.get(i);
             if (t.getAmount() > 0) {
-                System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
+                System.out.printf("%-12s | %-8s | %-40s | %-24s | %,14.2f%n",
                         t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());
             }
         }
-        System.out.println("-".repeat(105));
+        System.out.println("-".repeat(110));
     }
 
     public void displayExpenses() {
@@ -95,10 +95,10 @@ public class LedgerScreen {
         for (int i = 0; i < transactions.size(); i++) {
             Transaction t = transactions.get(i);
             if (t.getAmount() < 0) {
-                System.out.printf("%-12s | %-8s | %-40s | %-20s | %,14.2f%n",
+                System.out.printf("%-12s | %-8s | %-40s | %-24s | %,14.2f%n",
                         t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());
             }
         }
-        System.out.println("-".repeat(105));
+        System.out.println("-".repeat(110));
     }
 }
